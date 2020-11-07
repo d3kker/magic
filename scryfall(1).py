@@ -1,7 +1,7 @@
 import requests
 import json
 from tkinter import filedialog
-from tkinter import askopenfilename 
+#from tkinter import askopenfilename 
 import tkinter
 import pandas as pd
 
@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
     window = tkinter.Tk()
     window.title("OBS")
-    window.geometry('1200x550')
+    window.geometry('1100x550')
 
     label = tkinter.Label(window, text="Card Name").place(x = 25, y = 250)
 
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
     def open1():
         window.filename = filedialog.askopenfilename(initialdir="/", title="Select A File", filetypes=(("txt files", ".txt"),("all files", ".*"))) 
-        filename = askopenfilename()
+        #filename = askopenfilename()
     
     entry.bind("<Return>", callback)
 
@@ -80,7 +80,7 @@ if __name__ == "__main__":
     print(button["text"])
 
     button2 = tkinter.Button(window, text="Open File", command=open1, )
-    button2.place(x = 280, y = 300)
+    button2.place(x = 1000, y = 246)
     
 
 
