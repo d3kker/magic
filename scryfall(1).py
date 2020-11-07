@@ -1,8 +1,7 @@
 import requests
 import json
-from urllib.request import urlopen
-from PIL import Image
 from tkinter import filedialog
+from tkinter import askopenfilename 
 import tkinter
 import pandas as pd
 
@@ -33,9 +32,9 @@ def find_card_image(card):
             parsed = json.loads(response.text)
            #print(json.dumps(parsed, indent=4))
 
-            image_normal = parsed["image_uris"]["normal"]
+            #image_normal = parsed["image_uris"]["normal"]
             image_large = parsed["image_uris"]["large"]
-            image_border_crop = parsed["image_uris"]["border_crop"]
+            #image_border_crop = parsed["image_uris"]["border_crop"]
 
             #img = Image.open(urlopen(image_border_crop))
             #img.show()
@@ -71,8 +70,9 @@ if __name__ == "__main__":
 
 
     def open1():
-        window.filename = filedialog.askopenfilename(initialdir="/", title="Select A File", filetypes=(("jpg files", ".jpg"),("all files", ".*"))) 
-
+        window.filename = filedialog.askopenfilename(initialdir="/", title="Select A File", filetypes=(("txt files", ".txt"),("all files", ".*"))) 
+        filename = askopenfilename()
+    
     entry.bind("<Return>", callback)
 
     button = tkinter.Button(window, text="Click Me!", command=callback)
@@ -99,8 +99,7 @@ if __name__ == "__main__":
         if (index + 1) % 10 == 0:
             row_index = row_index + 1
 
-        #y0 = y0 + 40
-
+       
     window.mainloop()
 
 
