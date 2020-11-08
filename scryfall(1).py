@@ -70,10 +70,11 @@ if __name__ == "__main__":
 
 
     def open1():
-        window.filename = filedialog.askopenfilename(initialdir="/", title="Select A File", filetypes=(("txt files", ".txt"),("all files", ".*"))) 
+        #window.filename = filedialog.askopenfilename(initialdir="/", title="Select A File", filetypes=(("txt files", ".txt"),("all files", ".*"))) 
+        filename = filedialog.askopenfilename()
+        print ("Selected file: {}".format (filename))
+    
         
-    
-    
     def main():
        
         # Copy file to another directory
