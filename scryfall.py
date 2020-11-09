@@ -1,15 +1,18 @@
-import requests
 import json
-from tkinter import filedialog
-#from tkinter import askopenfilename 
-import tkinter
 import pandas as pd
+from PIL import Image
+import requests
 import shutil
-
-
+import tkinter
+from tkinter import filedialog
+from urllib.request import urlopen
 
 
 def write_css_file(url):
+    """
+    Write a .css linking to the image URL.
+    The .css file is read by OBS and displays the card image.
+    """
     with open("background.css", "w") as css_file:
         css_file.write("body")
         css_file.write("\n")
@@ -36,96 +39,57 @@ def find_card_image(card):
             image_large = parsed["image_uris"]["large"]
             #image_border_crop = parsed["image_uris"]["border_crop"]
 
-            #img = Image.open(urlopen(image_border_crop))
-            #img.show()
+            img = Image.open(urlopen(image_large))
+            img.show()
             write_css_file(image_large)
         except:
             print("Could not find card")
 
 
 if __name__ == "__main__":
-
-
-
     window = tkinter.Tk()
     window.title("OBS")
     window.geometry('1100x550')
 
-    label = tkinter.Label(window, text="Card Name").place(x = 25, y = 250)
+    label = tkinter.Label(window, text="Card search").place(x=25, y=450)
 
     entry = tkinter.Entry(window)
-    entry.place(x = 100, y = 250)
+    entry.place(x=100, y=450)
 
     def callback(event="<Button>"):
-        # print(entry.get())
         find_card_image(entry.get())
 
 
-    def specific_callback(card, event="<Button>"):
-        find_card_image(card)
+    def open_card_deck_file():
+        """
+        Open file browser window and return path to the selected file
+        """
+        card_deck_file = filedialog.askopenfilename(title="Select A File", filetypes=(("txt files", ".txt"),("all files", ".*")))
+        return card_deck_file
 
 
-    def callback_for_button():
-        print("Button clicked!")
-
-
-    def open1():
-        #window.filename = filedialog.askopenfilename(initialdir="/", title="Select A File", filetypes=(("txt files", ".txt"),("all files", ".*"))) 
-        window.filename = filedialog.askopenfilename()
-        print ("Selected file: {}".format (window.filename))
-    
-        '''
-    def main():
-       
-        # Copy file to another directory
-        newPath = shutil.copy('sample1.txt', '/home/varung/test')
-        
-        print("Path of copied file : ", newPath)
-        
-        #Copy a file with new name
-        newPath = shutil.copy('sample1.txt', '/home/varung/test/sample2.txt')
-        print("Path of copied file : ", newPath)
-       
-        # Copy a symbolic link as a new link
-        newPath = shutil.copy('/home/varung/test/link.csv', '/home/varung/test/sample2.csv')
-        print("Path of copied file : ", newPath)
-        
-        # Copy target file pointed by symbolic link
-        newPath = shutil.copy('/home/varung/test/link.csv', '/home/varung/test/newlink.csv', follow_symlinks=False)
-        print("Path of copied file : ", newPath)
-        
-    if __name__ == '__main__':
-        main()
-    
-    '''
-    
     entry.bind("<Return>", callback)
 
-    button = tkinter.Button(window, text="Click Me!", command=callback)
-    button.place(x = 230, y = 246)
-    print(button["text"])
+    button_search_card = tkinter.Button(window, text="Search", command=callback)
+    button_search_card.place(x=230, y=450)
 
-    button2 = tkinter.Button(window, text="Open File", command=open1, )
-    button2.place(x = 1000, y = 246)
-    
+    button_load_deck = tkinter.Button(window, text="Load deck file", command=open_card_deck_file)
+    button_load_deck.place(x=25, y=500)
 
-
-
-
+    card_deck_file = open_card_deck_file()
 
     # df is a pandas DataFrame, like a table
-    df = pd.read_csv("2face2.txt", sep=";", header=None)
+    df = pd.read_csv(card_deck_file, sep=";", header=None)
     list_of_cards = df[0].values
-    print(df)
-    #y0 = 0
+
     row_index = 0
+    number_of_columns = 5
     for index, card in enumerate(list_of_cards):
-        button = tkinter.Button(window, text=card, command=lambda x=card: find_card_image(x), height = 1, width = 30)
-        button.grid(row=row_index, column=index%5)
-        if (index + 1) % 10 == 0:
+        button = tkinter.Button(window, text=card, command=lambda x=card: find_card_image(x), height=1, width=30)
+        button.grid(row=row_index, column=index%number_of_columns)
+        if (index + 1) % number_of_columns == 0:
             row_index = row_index + 1
 
-       
     window.mainloop()
 
 
