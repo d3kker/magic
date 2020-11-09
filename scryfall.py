@@ -1,8 +1,7 @@
 import json
-import pandas as pd
+import numpy as np
 from PIL import Image
 import requests
-import shutil
 import tkinter
 from tkinter import filedialog
 from urllib.request import urlopen
@@ -82,9 +81,8 @@ if __name__ == "__main__":
         # Card deck file selection window
         card_deck_file = filedialog.askopenfilename(title="Select A File", filetypes=(("txt files", ".txt"),("all files", ".*")))
 
-        # df is a pandas DataFrame, like a table
-        df = pd.read_csv(card_deck_file, sep=";", header=None)
-        list_of_cards = df[0].values
+        # Read in cards form .txt file
+        list_of_cards = np.genfromtxt(card_deck_file, delimiter=";", dtype=str, unpack=True)
 
         row_index = 0
         number_of_columns = 5
