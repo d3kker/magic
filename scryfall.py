@@ -6,10 +6,11 @@ Created on Mon Nov  9 21:44:40 2020
 """
 import json
 import numpy as np
+#from PIL import Image # needed to open image URL in windows image viewer
 import requests
 import tkinter
 from tkinter import filedialog
-
+#from urllib.request import urlopen # needed to open image URL in windows image viewer
 
 
 def write_css_file(url):
@@ -73,7 +74,7 @@ if __name__ == "__main__":
     # Save each deck in this list in order to destroy them when a new deck is loaded with open_card_deck_file()
     list_of_buttons = []
 
-    def open_card_deck_file():
+    def open_card_deck_file(event="<Button>"):
         """
         Open file browser window, select deck file and display each card as a button.
         Will destroy buttons loaded from previous deck files.
@@ -107,7 +108,5 @@ if __name__ == "__main__":
 
     button_load_deck = tkinter.Button(window, text="Load deck file", command=open_card_deck_file)
     button_load_deck.place(x=25, y=0.9*window_y)
-
-    card_deck_file = open_card_deck_file()
 
     window.mainloop()
