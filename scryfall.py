@@ -1,10 +1,15 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Nov  9 21:44:40 2020
+
+@author: W. Dekker and M. Pilch
+"""
 import json
 import numpy as np
-from PIL import Image
 import requests
 import tkinter
 from tkinter import filedialog
-from urllib.request import urlopen
+
 
 
 def write_css_file(url):
@@ -38,8 +43,8 @@ def find_card_image(card):
             image_large = parsed["image_uris"]["large"]
             #image_border_crop = parsed["image_uris"]["border_crop"]
 
-            img = Image.open(urlopen(image_large))
-            img.show()
+            #img = Image.open(urlopen(image_large))
+            #img.show()
             write_css_file(image_large)
         except:
             print("Could not find card")
@@ -56,7 +61,7 @@ if __name__ == "__main__":
 
     label_x = 25
     label_y = 0.8 * window_y
-
+    
     label = tkinter.Label(window, text="Card search").place(x=label_x, y=label_y)
 
     entry = tkinter.Entry(window)
@@ -97,8 +102,8 @@ if __name__ == "__main__":
 
     entry.bind("<Return>", callback)
 
-    button_search_card = tkinter.Button(window, text="Search", command=callback)
-    button_search_card.place(x=label_x+230, y=label_y)
+    button_search_card = tkinter.Button(window, text="Search/reset card", command=callback)
+    button_search_card.place(x=label_x+230, y=label_y-4)
 
     button_load_deck = tkinter.Button(window, text="Load deck file", command=open_card_deck_file)
     button_load_deck.place(x=25, y=0.9*window_y)
