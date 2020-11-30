@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Nov  9 21:44:40 2020
-
 @author: W. Dekker and M. Pilch
 """
 import json
 import numpy as np
-#from PIL import Image # needed to open image URL in windows image viewer
+import re
 import requests
 import tkinter
 from tkinter import filedialog
-#from urllib.request import urlopen # needed to open image URL in windows image viewer
 
 
 def write_css_file(url):
@@ -19,16 +17,11 @@ def write_css_file(url):
     The .css file is read by OBS and displays the card image.
     """
     with open("background.css", "w") as css_file:
-        css_file.write("body")
-        css_file.write("\n")
-        css_file.write("{")
-        css_file.write("\n")
-        css_file.write(f"background-image: url(\"{url}\");")
-        css_file.write("\n")
-        css_file.write("background-repeat: no-repeat;")
-        css_file.write("\n")
-        css_file.write("}")
-
+        print("body", file=css_file)
+        print("{", file=css_file)
+        print(f"background-image: url(\"{url}\");", file=css_file)
+        print("background-repeat: no-repeat;", file=css_file)
+        print("}", file=css_file)
 
 def find_card_image(card):
     if card == "":
@@ -38,14 +31,12 @@ def find_card_image(card):
             response = requests.get("https://api.scryfall.com/cards/named?fuzzy=" + card)
 
             parsed = json.loads(response.text)
-           #print(json.dumps(parsed, indent=4))
+            #print(json.dumps(parsed, indent=4))
 
             #image_normal = parsed["image_uris"]["normal"]
             image_large = parsed["image_uris"]["large"]
             #image_border_crop = parsed["image_uris"]["border_crop"]
 
-            #img = Image.open(urlopen(image_large))
-            #img.show()
             write_css_file(image_large)
         except:
             print("Could not find card")
@@ -62,7 +53,7 @@ if __name__ == "__main__":
 
     label_x = 25
     label_y = 0.8 * window_y
-    
+
     label = tkinter.Label(window, text="Card search").place(x=label_x, y=label_y)
 
     entry = tkinter.Entry(window)
@@ -89,6 +80,12 @@ if __name__ == "__main__":
 
         # Read in cards form .txt file
         list_of_cards = np.genfromtxt(card_deck_file, delimiter=";", dtype=str, unpack=True)
+
+        # Remove number of cards from string with regular expressions
+        for index, card in enumerate(list_of_cards):
+            match = re.search("(\d\s)(.+)", card)
+            if match:
+                list_of_cards[index] = match.group(2)
 
         row_index = 0
         number_of_columns = 5
