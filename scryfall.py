@@ -5,11 +5,10 @@ Created on Mon Nov  9 21:44:40 2020
 """
 import json
 import numpy as np
-from PIL import Image, ImageTk
 import re
 import requests
 import tkinter
-from tkinter import filedialog, PhotoImage
+from tkinter import filedialog
 
 
 def write_css_file(url):
@@ -65,11 +64,6 @@ if __name__ == "__main__":
 
     # Save each deck in this list in order to destroy them when a new deck is loaded with open_card_deck_file()
     list_of_buttons = []
-
-
-    image_button = Image.open("Buttonbg.png")
-    image_button = image_button.resize((200, 20), Image.ANTIALIAS)
-    image_button = ImageTk.PhotoImage(image_button)
 
     def open_card_deck_file(event="<Button>"):
         """
