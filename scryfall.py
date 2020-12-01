@@ -83,19 +83,23 @@ if __name__ == "__main__":
 
         # Remove number of cards from string with regular expressions
         for index, card in enumerate(list_of_cards):
-            match = re.search("(\d\s)(.+)", card)
+            match = re.search("\d+\s(.+)", card)
             if match:
-                list_of_cards[index] = match.group(2)
+                list_of_cards[index] = match.group(1)
 
         row_index = 0
-        number_of_columns = 5
+        col_index = 0
+        number_of_rows = 20
 
         for index, card in enumerate(list_of_cards):
-            button = tkinter.Button(window, text=card, command=lambda x=card: find_card_image(x), height=1, width=30)
-            button.grid(row=row_index, column=index%number_of_columns)
+            # anchor="w" means "west", can be NW, N, NE, E, SE, S, SW, W
+            button = tkinter.Button(window, text=card, anchor="w", command=lambda x=card: find_card_image(x), height=1, width=30)
+            button.grid(row=row_index, column=col_index)
             list_of_buttons.append(button)
-            if (index + 1) % number_of_columns == 0:
-                row_index = row_index + 1
+            row_index = row_index + 1
+            if row_index == number_of_rows:
+                col_index = col_index + 1
+                row_index = 0
 
 
     entry.bind("<Return>", callback)
