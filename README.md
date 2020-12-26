@@ -10,7 +10,7 @@ Load in your personal deck file from any deck building site that gives out a lis
 1. Download the [latest release](https://github.com/d3kker/magic/releases/latest) and unpack it. 
 2. Open OBS.
 3. Add a new browser source.
-4. Tick the  "Local file" checkbox and add the Index.html to the browser source:
+4. Tick the  "Local file" checkbox and add the index.html to the browser source:
 ![OBS browser source](images/OBS_browser_source.png)
 5. Start the magicOBS.exe.
 6. Load in a "Decklist.txt". If you click the name of the card it shows up on the screen in OBS.  Alternatively you can use the search field to search for any card (even outside your deck).
