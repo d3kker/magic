@@ -1,6 +1,6 @@
 # magicOBS
 
-Display Magic: The Gathering cards in OBS.
+Display Magic: The Gathering cards in OBS. For Windows only.
 
 Load in your personal deck file from any deck building site that gives out a list in .txt format.
 ![Program example](images/macOBS_example.png)
@@ -26,8 +26,7 @@ We use PyInstaller to build the executable. We specifically do not use Python bu
 Download Python from https://www.python.org/downloads/.
 
 In CMD, go to the magicOBS directory and create a virtual environment. The name of the virtual environment can be anything, here we choose "venv_py39" because we use Python 3.9.
-
-Then in CMD, enter:
+To create the virtual environment, in CMD enter:
 
 ```
 python -m venv venv_py39
@@ -36,7 +35,7 @@ python -m venv venv_py39
 and then activate the environment by executing
 
 ```
-venv_py39\Scripts>activate.bat
+venv_py39\Scripts\activate.bat
 ```
 
 Install all modules required using pip:
