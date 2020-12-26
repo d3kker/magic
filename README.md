@@ -45,7 +45,7 @@ Install all modules required using pip:
 pip install -r requirements.txt
 ```
 
-The "-r" option is short for "--requirement" and needs to be followed by <file>. If you make modifications to magicOBS.py and add or remove modules, you can list all modules currently installed in the virtual environment by typing
+The "-r" option is short for "--requirement" and needs to be followed by the file name. If you make modifications to magicOBS.py and add or remove modules, you can list all modules currently installed in the virtual environment by typing
 
 ```
 pip freeze
