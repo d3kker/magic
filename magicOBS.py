@@ -23,6 +23,7 @@ def write_css_file(url):
         print("background-repeat: no-repeat;", file=css_file)
         print("}", file=css_file)
 
+
 def find_card_image(card):
     if card == "":
         write_css_file("")
@@ -44,7 +45,7 @@ def find_card_image(card):
 
 if __name__ == "__main__":
     window = tkinter.Tk()
-    window.title("OBS")
+    window.title("magicOBS")
 
     window_x = 1100
     window_y = 750
