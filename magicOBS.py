@@ -40,8 +40,8 @@ def find_card_image(card):
 
             write_css_file(image_large)
         except:
-            print("Could not find card")
-
+            #print("Could not find card")
+            write_css_file("https://raw.githubusercontent.com/d3kker/magic/main/images/404errormtgcard.jpg")
 
 if __name__ == "__main__":
     window = tkinter.Tk()
